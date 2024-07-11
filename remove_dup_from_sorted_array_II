@@ -1,0 +1,44 @@
+# Intuition
+# The problem requires us to modify a sorted array such that each element appears at most twice, without using extra space for another array. This can be achieved by leveraging the properties of sorted arrays and using a two-pointer approach to efficiently manage the placement of elements.
+
+# Approach
+# Base Case Handling:
+
+# If the array has 2 or fewer elements, it already satisfies the condition, so we return its length directly.
+# Two Pointers Initialization:
+
+# Use two pointers: i and j. i will track the position in the modified array, and j will iterate over the original array.
+# Initialize i to 2 because the first two elements can always stay as they are.
+# Iterate and Compare:
+
+# Start iterating from the third element (index 2).
+# For each element nums[j], check if it is different from the element at i-2 (i.e., the element that would be two places back in the modified array).
+# If nums[j] is different from nums[i-2], it means that nums[j] can be placed at i without violating the "at most twice" condition.
+# Update the Array:
+
+# If the condition is satisfied, assign nums[j] to nums[i] and increment i.
+# Return the Result:
+
+# After iterating through the entire array, i will represent the length of the modified array where each element appears at most twice.
+
+# Complexity
+# Time complexity:
+# Time Complexity is O(n)
+
+# Space complexity:
+# Space complexity is O(1)
+
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        if len(nums) <= 2:
+            return len(nums)
+
+        i = 2
+        for j in range(2, len(nums)):
+            if nums[j] != nums[i-2]:
+                nums[i] = nums[j]
+                i += 1
+        
+        return i  
+
+        
